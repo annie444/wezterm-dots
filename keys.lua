@@ -7,7 +7,10 @@ M.apply_to_config = function(cfg)
   end
   local wezterm = cfg.wezterm
   config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
-  config.keys = {
+  if config.keys == nil then
+    config.keys = {}
+  end
+  local custom_keys = {
     { key = "F11", mods = "",       action = wezterm.action.ToggleFullScreen },
     { key = " ",   mods = "LEADER", action = wezterm.action.SendKey({ key = " ", mods = "CTRL" }) },
     { key = "h",   mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
@@ -52,6 +55,11 @@ M.apply_to_config = function(cfg)
     { key = "PageUp",   mods = "SHIFT",      action = wezterm.action.ScrollByPage(-1) },
     { key = "PageDown", mods = "SHIFT",      action = wezterm.action.ScrollByPage(1) },
   }
+
+  for _, key in ipairs(custom_keys) do
+    table.insert(config.keys, key)
+  end
+
   for i = 1, 9 do
     table.insert(config.keys, {
       key = tostring(i),

@@ -71,4 +71,5 @@ M.apply_to_config = function(cfg)
 
   tabline_plugin(config, wezterm)
 end
+
 return M
