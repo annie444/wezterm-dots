@@ -5,7 +5,7 @@ local M = {}
 local function cmd_sender_plugin(config, wezterm)
   local cmd_sender = wezterm.plugin.require("https://github.com/aureolebigben/wezterm-cmd-sender")
   cmd_sender.apply_to_config(config, {
-    key = "S",
+    key = "mapped:s",
     mods = "CTRL|SHIFT",
     description = "Enter command to send to all panes of active tab",
   })
