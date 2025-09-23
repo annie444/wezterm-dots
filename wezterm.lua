@@ -25,10 +25,10 @@ gui.apply_to_config({ config = config, wezterm = wezterm })
 local domains = require("domains")
 domains.apply_to_config({ config = config, wezterm = wezterm })
 
-local plugins = require("plugins")
-plugins.apply_to_config({ config = config, wezterm = wezterm })
-
 local keys = require("keys")
 keys.apply_to_config({ config = config, wezterm = wezterm })
+
+local plugins = require("plugins")
+plugins.apply_to_config({ config = config, wezterm = wezterm })
 
 return config
