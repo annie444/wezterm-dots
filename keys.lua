@@ -83,11 +83,11 @@ M.apply_to_config = function(cfg)
   }
 
   for _, key in ipairs(custom_keys) do
-    table.insert(config.keys, key)
+    table.insert(config.keys, 1, key)
   end
 
   for i = 1, 9 do
-    table.insert(config.keys, {
+    table.insert(config.keys, 1, {
       key = tostring(i),
       mods = "CTRL|SHIFT",
       action = act.ActivateTab(i),
@@ -95,7 +95,7 @@ M.apply_to_config = function(cfg)
   end
 
   for i = 1, 9 do
-    table.insert(config.keys, {
+    table.insert(config.keys, 1, {
       key = tostring(i),
       mods = "LEADER",
       action = act.ActivatePaneByIndex(i),
