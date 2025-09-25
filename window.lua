@@ -26,7 +26,7 @@ M.apply_to_config = function(cfg)
   config.window_background_opacity = 0.9
   config.quit_when_all_windows_are_closed = true
   config.scroll_to_bottom_on_input = true
-  config.scrollback_lines = 20000
+  config.scrollback_lines = 200000
   config.exit_behavior = "Close"
   config.skip_close_confirmation_for_processes_named = {
     "bash",
