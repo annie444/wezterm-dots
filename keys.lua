@@ -52,6 +52,7 @@ M.apply_to_config = function(cfg)
 		{ key = "X", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 		{ key = "F", mods = "CTRL|SHIFT", action = act.ToggleFullScreen },
 		{ key = "D", mods = "CTRL|SHIFT", action = act.ShowDebugOverlay },
+		{ key = "M", mods = "CTRL|SHIFT", action = act.ShowLauncher },
 		{ key = "W", mods = "CTRL|SHIFT", action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 		{
 			key = "N",
