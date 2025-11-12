@@ -12,7 +12,7 @@ M.apply_to_config = function(cfg)
 		left = "1cell",
 		right = "1cell",
 		top = "1cell",
-		bottom = "1cell",
+		bottom = "2cell",
 	}
 	config.window_frame = {
 		font = wezterm.font({ family = "JetBrainsMono Nerd Font Propo", weight = "Bold" }),
