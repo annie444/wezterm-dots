@@ -53,7 +53,6 @@ M.apply_to_config = function(cfg)
 	config.bold_brightens_ansi_colors = "No"
 	config.hyperlink_rules = wezterm.default_hyperlink_rules()
 	config.warn_about_missing_glyphs = true
-	config.font_antialias = "Subpixel"
 end
 
 return M
