@@ -18,6 +18,7 @@ M.apply_to_config = function(cfg)
 				addkeystoagent = "yes",
 				forwardagent = "yes",
 				forwardx11 = "yes",
+				setenv = "PINENTRY_USER_DATA=curses",
 			},
 		},
 	}
