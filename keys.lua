@@ -12,7 +12,7 @@ M.apply_to_config = function(cfg)
   config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
   local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
-  local custom_keys = {
+  config.keys = {
     { key = "F11", mods = "", action = act.ToggleFullScreen },
     { key = " ", mods = "LEADER", action = act.SendKey({ key = " ", mods = "CTRL" }) },
     { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
@@ -40,9 +40,9 @@ M.apply_to_config = function(cfg)
     { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "f", mods = "LEADER", action = act.ToggleFullScreen },
     { key = "e", mods = "CTRL", action = act.PaneSelect({ alphabet = "1234567890", mode = "Activate" }) },
-    { key = "s", mods = "CTRL", action = act.EmitEvent("save_session") },
-    { key = "l", mods = "CTRL", action = act.EmitEvent("load_session") },
-    { key = "r", mods = "CTRL", action = act.EmitEvent("restore_session") },
+    { key = "s", mods = "CTRL", action = act({ EmitEvent = "save_session" }) },
+    { key = "l", mods = "CTRL", action = act({ EmitEvent = "load_session" }) },
+    { key = "r", mods = "CTRL", action = act({ EmitEvent = "restore_session" }) },
     { key = ">", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "<", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "L", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(1) },
@@ -86,8 +86,6 @@ M.apply_to_config = function(cfg)
     { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-1) },
     { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(1) },
   }
-
-  config.keys = custom_keys
 
   for i = 1, 9 do
     table.insert(config.keys, 1, {
