@@ -2,6 +2,15 @@ local M = {}
 
 ---@param config Config
 ---@param wezterm Wezterm
+local function session_manager_plugin(config, wezterm)
+  local session_manager = require("https://github.com/danielcopper/wezterm-session-manager")
+  wezterm.on("save_session", function(window) session_manager.save_state(window) end)
+  wezterm.on("load_session", function(window) session_manager.load_state(window) end)
+  wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
+end
+
+---@param config Config
+---@param wezterm Wezterm
 local function cmd_sender_plugin(config, wezterm)
   local cmd_sender = wezterm.plugin.require("https://github.com/aureolebigben/wezterm-cmd-sender")
   cmd_sender.apply_to_config(config, {
@@ -42,13 +51,13 @@ local function tabline_plugin(config, wezterm)
         "index",
         { "parent", padding = 0 },
         "/",
-        { "cwd",    padding = { left = 0, right = 1 } },
+        { "cwd", padding = { left = 0, right = 1 } },
         { "zoomed", padding = 0 },
       },
       tab_inactive = {
         "index",
         { "process", padding = { left = 0, right = 1 } },
-        { "output",  icon_no_output = "" },
+        { "output", icon_no_output = "" },
       },
       tabline_x = { "ram", "cpu" },
       tabline_y = { "datetime", "battery" },
@@ -62,14 +71,12 @@ end
 ---@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
 M.apply_to_config = function(cfg)
   local config = cfg.config
-  if cfg.wezterm == nil then
-    cfg.wezterm = require("wezterm")
-  end
+  if cfg.wezterm == nil then cfg.wezterm = require("wezterm") end
   local wezterm = cfg.wezterm
 
   cmd_sender_plugin(config, wezterm)
-
   tabline_plugin(config, wezterm)
+  session_manager_plugin(config, wezterm)
 end
 
 return M
