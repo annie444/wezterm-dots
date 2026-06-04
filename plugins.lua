@@ -2,6 +2,13 @@ local M = {}
 
 ---@param config Config
 ---@param wezterm Wezterm
+local function sync_panes_plugin(config, wezterm)
+  local sync_panes = wezterm.plugin.require("https://github.com/annie444/sync-panes.wez")
+  sync_panes.apply_to_config(config)
+end
+
+---@param config Config
+---@param wezterm Wezterm
 local function session_manager_plugin(_, wezterm)
   local session_manager = require("wezterm-session-manager/session-manager")
   wezterm.on("save_session", function(window) session_manager.save_state(window) end)
@@ -92,6 +99,7 @@ M.apply_to_config = function(cfg)
   tabline_plugin(config, wezterm)
   session_manager_plugin(config, wezterm)
   workspace_switcher_plugin(config, wezterm)
+  sync_panes_plugin(config, wezterm)
 end
 
 return M
