@@ -3,7 +3,7 @@ local M = {}
 ---@param config Config
 ---@param wezterm Wezterm
 local function session_manager_plugin(config, wezterm)
-  local session_manager = wezterm.plugin.require("https://github.com/danielcopper/wezterm-session-manager")
+  local session_manager = require("wezterm-session-manager/session-manager")
   wezterm.on("save_session", function(window) session_manager.save_state(window) end)
   wezterm.on("load_session", function(window) session_manager.load_state(window) end)
   wezterm.on("restore_session", function(window) session_manager.restore_state(window) end)
