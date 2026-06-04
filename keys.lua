@@ -10,8 +10,6 @@ M.apply_to_config = function(cfg)
   local act = wezterm.action
 
   config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 }
-  local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
-
   config.keys = {
     { key = "F11", mods = "", action = act.ToggleFullScreen },
     { key = " ", mods = "LEADER", action = act.SendKey({ key = " ", mods = "CTRL" }) },
@@ -39,8 +37,6 @@ M.apply_to_config = function(cfg)
     { key = "v", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "f", mods = "LEADER", action = act.ToggleFullScreen },
-    { key = "s", mods = "CTRL|SHIFT", action = workspace_switcher.switch_workspace() },
-    { key = "S", mods = "CTRL|SHIFT", action = workspace_switcher.switch_to_prev_workspace() },
     { key = "e", mods = "CTRL", action = act.PaneSelect({ alphabet = "1234567890", mode = "Activate" }) },
     { key = "s", mods = "CTRL", action = act.EmitEvent("save_session") },
     { key = "l", mods = "CTRL", action = act.EmitEvent("load_session") },

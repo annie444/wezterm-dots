@@ -2,7 +2,7 @@ local M = {}
 
 ---@param config Config
 ---@param wezterm Wezterm
-local function session_manager_plugin(config, wezterm)
+local function session_manager_plugin(_, wezterm)
   local session_manager = require("wezterm-session-manager/session-manager")
   wezterm.on("save_session", function(window) session_manager.save_state(window) end)
   wezterm.on("load_session", function(window) session_manager.load_state(window) end)
@@ -68,6 +68,20 @@ local function tabline_plugin(config, wezterm)
   tabline.apply_to_config(config)
 end
 
+---@param config Config
+---@param wezterm Wezterm
+local function workspace_switcher_plugin(config, wezterm)
+  local workspace_switcher = wezterm.plugin.require("https://github.com/isseii10/workspace-picker.wezterm")
+  workspace_switcher.setup({
+    keybinds = {
+      show_picker = { mods = "LEADER", key = "s" },
+      create_workspace = { mods = "LEADER", key = "S" },
+      rename_workspace = { mods = "LEADER", key = "r" },
+    },
+  })
+  workspace_switcher.apply_to_config(config)
+end
+
 ---@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
 M.apply_to_config = function(cfg)
   local config = cfg.config
@@ -77,6 +91,7 @@ M.apply_to_config = function(cfg)
   cmd_sender_plugin(config, wezterm)
   tabline_plugin(config, wezterm)
   session_manager_plugin(config, wezterm)
+  workspace_switcher_plugin(config, wezterm)
 end
 
 return M
