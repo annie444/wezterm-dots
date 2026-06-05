@@ -32,20 +32,27 @@ M.apply_to_config = function(cfg)
   table.insert(config.ssh_domains, spinoza_domain)
   config.default_workspace = "main"
 
-  local unix_domain_host = "spinoza."
-  local host_success, hostname, host_err = wezterm.run_child_process({ "hostname" })
-  if not host_success or not string.sub(hostname, 1, string.len(unix_domain_host)) == unix_domain_host then
+  local host_success, hostname_out, host_err = wezterm.run_child_process({ "hostname" })
+  local hostname_str = hostname_out or ""
+  local hostname = hostname_str:gsub("%s+", "")
+  if (not host_success) or (hostname == "spinoza.ipac.caltech.edu") then
     if not host_success then
       wezterm.log_error("Failed to determine if we're running on spinoza: " .. (host_err or "unknown error"))
+    else
+      wezterm.log_info("Not running on spinoza, skipping unix domain configuration")
     end
     return
   end
-  local uid_success, uid_str, uid_err = wezterm.run_child_process({ "id", "-u" })
-  if not uid_success or string.len(uid_str) == 0 then
-    if not uid_success then wezterm.log_error("Failed to determine user ID: " .. (uid_err or "unknown error")) end
+  local uid_success, uid_str, uid_err = wezterm.run_child_process({ "id", "-r", "-z", "-u" })
+  if (not uid_success) or uid_str:len() == 0 then
+    if not uid_success then
+      wezterm.log_error("Failed to determine user ID: " .. (uid_err or "unknown error"))
+    else
+      wezterm.log_error("Failed to determine user ID: empty output")
+    end
     return
   end
-  local uid = tonumber(uid_str:gsub("%s+", ""))
+  local uid = tonumber(uid_str)
 
   ---@type UnixDomain
   local spinoza_unix_domain = {
