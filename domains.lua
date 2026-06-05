@@ -36,7 +36,7 @@ M.apply_to_config = function(cfg)
   local hostname_str = hostname_out or ""
   local hostname = hostname_str:gsub("%s+", "")
   wezterm.log_info("Hostname: " .. hostname)
-  if (not host_success) or (hostname == "spinoza.ipac.caltech.edu") then
+  if (not host_success) or (hostname ~= "spinoza.ipac.caltech.edu") then
     if not host_success then
       wezterm.log_error("Failed to determine if we're running on spinoza: " .. (host_err or "unknown error"))
     else
