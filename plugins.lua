@@ -7,7 +7,6 @@ local function sync_panes_plugin(config, wezterm)
   sync_panes.apply_to_config(config)
 end
 
----@param config Config
 ---@param wezterm Wezterm
 local function session_manager_plugin(_, wezterm)
   local session_manager = require("wezterm-session-manager/session-manager")
