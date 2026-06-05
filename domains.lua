@@ -8,12 +8,14 @@ M.apply_to_config = function(cfg)
   config.ssh_domains = wezterm.default_ssh_domains()
   ---@type SshDomain
   local spinoza_domain = {
+    connect_automatically = false,
     name = "spinoza",
     remote_address = "spinoza.ipac.caltech.edu",
     no_agent_auth = false,
     username = "annie",
     multiplexing = "WezTerm",
     local_echo_threshold_ms = 10,
+    override_proxy_command = "/usr/bin/wezterm cli --class --prefer-mux proxy",
     ssh_option = {
       port = "22",
       user = "annie",
