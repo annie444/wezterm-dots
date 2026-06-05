@@ -35,7 +35,6 @@ M.apply_to_config = function(cfg)
   local host_success, hostname_out, host_err = wezterm.run_child_process({ "hostname" })
   local hostname_str = hostname_out or ""
   local hostname = hostname_str:gsub("%s+", "")
-  wezterm.log_info("Hostname: " .. hostname)
   if (not host_success) or (hostname ~= "spinoza.ipac.caltech.edu") then
     if not host_success then
       wezterm.log_error("Failed to determine if we're running on spinoza: " .. (host_err or "unknown error"))
@@ -44,8 +43,8 @@ M.apply_to_config = function(cfg)
     end
     return
   end
-  local uid_success, uid_str, uid_err = wezterm.run_child_process({ "id", "-ru" })
-  wezterm.log_info("UID: " .. uid_str)
+  local uid_success, uid_out, uid_err = wezterm.run_child_process({ "id", "-ru" })
+  local uid_str = uid_out or ""
   if (not uid_success) or uid_str:len() == 0 then
     if not uid_success then
       wezterm.log_error("Failed to determine user ID: " .. (uid_err or "unknown error"))
