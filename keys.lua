@@ -37,6 +37,19 @@ M.apply_to_config = function(cfg)
     { key = "v", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "x", mods = "LEADER", action = act.ActivateCopyMode },
     { key = "f", mods = "LEADER", action = act.ToggleFullScreen },
+    {
+      key = "u",
+      mods = "LEADER",
+      action = act.Confirmation({
+        message = "Do you want to update all plugins?",
+        action = wezterm.action_callback(function(_, _)
+          wezterm.log_info("Updating plugins...")
+          wezterm.plugin.update_all()
+          wezterm.log_info("Plugins updated, reloading configuration...")
+          wezterm.reload_configuration()
+        end),
+      }),
+    },
     { key = "e", mods = "CTRL", action = act.PaneSelect({ alphabet = "1234567890", mode = "Activate" }) },
     { key = "s", mods = "CTRL", action = act.EmitEvent("save_session") },
     { key = "l", mods = "CTRL", action = act.EmitEvent("load_session") },
