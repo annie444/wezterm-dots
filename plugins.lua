@@ -34,12 +34,25 @@ end
 ---@param wezterm Wezterm
 local function tabline_plugin(config, wezterm)
   local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+  ---@type Palette
+  local colors = wezterm.color.get_builtin_schemes()["Dracula (Official)"]
+  ---@type string
+  local surface = colors.cursor and colors.cursor.bg or colors.ansi[1]
+  local background = colors.tab_bar and colors.tab_bar.inactive_tab and colors.tab_bar.inactive_tab.bg_color
+    or colors.background
+
   tabline.setup({
     options = {
       icons_enabled = true,
       theme = "Dracula (Official)",
       tabs_enabled = true,
-      theme_overrides = {},
+      theme_overrides = {
+        sync_mode = {
+          a = { fg = background, bg = colors.ansi[6] },
+          b = { fg = colors.ansi[6], bg = surface },
+          c = { fg = colors.foreground, bg = background },
+        },
+      },
       section_separators = {
         left = wezterm.nerdfonts.ple_right_half_circle_thick,
         right = wezterm.nerdfonts.ple_left_half_circle_thick,
