@@ -66,4 +66,5 @@ function M.apply_to_config(cfg)
   table.insert(config.unix_domains, spinoza_unix_domain)
   config.default_gui_startup_args = { "connect", "spinoza-unix" }
 end
+
 return M

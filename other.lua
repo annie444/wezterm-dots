@@ -1,7 +1,8 @@
 local M = {}
 
----@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
-M.apply_to_config = function(cfg)
+---@param cfg { config: Config } | { config: Config, wezterm: Wezterm }
+---@return nil
+function M.apply_to_config(cfg)
   ---@type Config
   local config = cfg.config
   config.ui_key_cap_rendering = "UnixLong"
@@ -15,4 +16,5 @@ M.apply_to_config = function(cfg)
   config.canonicalize_pasted_newlines = "LineFeed"
   config.default_cursor_style = "SteadyBlock"
 end
+
 return M
