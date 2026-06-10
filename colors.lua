@@ -1,6 +1,7 @@
 local M = {}
----@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
-M.apply_to_config = function(cfg)
+---@param cfg { config: Config } | { config: Config, wezterm: Wezterm }
+---@return nil
+function M.apply_to_config(cfg)
   local config = cfg.config
   config.color_scheme = "Dracula (Official)"
   config.colors = {
@@ -9,4 +10,5 @@ M.apply_to_config = function(cfg)
     },
   }
 end
+
 return M

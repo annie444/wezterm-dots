@@ -1,6 +1,8 @@
 local M = {}
----@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
-M.apply_to_config = function(cfg)
+
+---@param cfg { config: Config } | { config: Config, wezterm: Wezterm }
+---@return nil
+function M.apply_to_config(cfg)
   ---@type Config
   local config = cfg.config
   if cfg.wezterm == nil then cfg.wezterm = require("wezterm") end
@@ -51,9 +53,9 @@ M.apply_to_config = function(cfg)
       }),
     },
     { key = "e", mods = "CTRL", action = act.PaneSelect({ alphabet = "1234567890", mode = "Activate" }) },
-    { key = "s", mods = "CTRL", action = act.EmitEvent("save_session") },
-    { key = "l", mods = "CTRL", action = act.EmitEvent("load_session") },
-    { key = "r", mods = "CTRL", action = act.EmitEvent("restore_session") },
+    { key = "s", mods = "ALT", action = act.EmitEvent("save_session") },
+    { key = "l", mods = "ALT", action = act.EmitEvent("load_session") },
+    { key = "r", mods = "ALT", action = act.EmitEvent("restore_session") },
     { key = ">", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "<", mods = "CTRL|SHIFT", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "L", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(1) },
@@ -113,47 +115,5 @@ M.apply_to_config = function(cfg)
     })
   end
 end
-return M
 
---- Commands:
--- ClearSelection
--- CloseCurrentPane
--- CloseCurrentTab
--- CompleteSelection
--- CompleteSelectionOrOpenLinkAtMouseCursor
--- Confirmation
--- Copy
--- CopyTo
--- EmitEvent
--- ExtendSelectionToMouseCursor
--- InputSelector
--- Multiple
--- Nop
--- OpenLinkAtMouseCursor
--- PaneSelect
--- Paste
--- PasteFrom
--- PastePrimarySelection
--- PopKeyTable
--- PromptInputLine
--- QuickSelect
--- QuickSelectArgs
--- QuitApplication
--- ReloadConfiguration
--- ResetFontAndWindowSize
--- ResetFontSize
--- ResetTerminal
--- RotatePanes
--- Search
--- SelectTextAtMouseCursor
--- SendKey
--- SendString
--- SetWindowLevel
--- Show
--- ShowDebugOverlay
--- ShowLauncher
--- ShowLauncherArgs
--- ShowTabNavigator
--- ToggleAlwaysOnBottom
--- ToggleAlwaysOnTop
--- TogglePaneZoomState
+return M

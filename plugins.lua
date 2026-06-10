@@ -10,6 +10,7 @@ local function sync_panes_plugin(config, wezterm)
   sync_panes.apply_to_config(config, opts)
 end
 
+---@param _ Config
 ---@param wezterm Wezterm
 local function session_manager_plugin(_, wezterm)
   local session_manager = require("wezterm-session-manager/session-manager")
@@ -91,8 +92,9 @@ local function workspace_switcher_plugin(config, wezterm)
   workspace_switcher.apply_to_config(config)
 end
 
----@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
-M.apply_to_config = function(cfg)
+---@param cfg { config: Config } | { config: Config, wezterm: Wezterm }
+---@return nil
+function M.apply_to_config(cfg)
   local config = cfg.config
   if cfg.wezterm == nil then cfg.wezterm = require("wezterm") end
   local wezterm = cfg.wezterm

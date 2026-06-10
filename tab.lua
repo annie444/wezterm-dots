@@ -1,6 +1,8 @@
 local M = {}
----@type fun(cfg: { config: Config } | { config: Config, wezterm: Wezterm }): nil
-M.apply_to_config = function(cfg)
+
+---@param cfg { config: Config } | { config: Config, wezterm: Wezterm }
+---@return nil
+function M.apply_to_config(cfg)
   local config = cfg.config
   config.enable_tab_bar = true
   config.hide_tab_bar_if_only_one_tab = false
@@ -11,4 +13,5 @@ M.apply_to_config = function(cfg)
   config.show_tab_index_in_tab_bar = true
   config.show_tabs_in_tab_bar = true
 end
+
 return M
