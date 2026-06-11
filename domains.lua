@@ -61,6 +61,7 @@ function M.apply_to_config(cfg)
     name = "spinoza-unix",
     socket_path = "/run/user/" .. uid .. "/wezterm/sock",
     no_serve_automatically = true,
+    connect_automatically = true,
   }
   config.unix_domains = config.unix_domains or {}
   table.insert(config.unix_domains, spinoza_unix_domain)
