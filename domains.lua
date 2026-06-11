@@ -39,33 +39,16 @@ function M.apply_to_config(cfg)
   if (not host_success) or (hostname ~= "spinoza.ipac.caltech.edu") then
     if not host_success then
       wezterm.log_error("Failed to determine if we're running on spinoza: " .. (host_err or "unknown error"))
-    else
-      wezterm.log_info("Not running on spinoza, skipping unix domain configuration")
     end
     return
   end
-  local uid_success, uid_out, uid_err = wezterm.run_child_process({ "id", "-ru" })
-  local uid_str = uid_out or ""
-  if (not uid_success) or uid_str:len() == 0 then
-    if not uid_success then
-      wezterm.log_error("Failed to determine user ID: " .. (uid_err or "unknown error"))
-    else
-      wezterm.log_error("Failed to determine user ID: empty output")
-    end
-    return
-  end
-  local uid = tonumber(uid_str)
 
-  ---@type UnixDomain
-  local spinoza_unix_domain = {
-    name = "spinoza-unix",
-    socket_path = "/run/user/" .. uid .. "/wezterm/sock",
-    no_serve_automatically = true,
-    connect_automatically = true,
+  local linux_domain = {
+    name = "unix",
   }
   config.unix_domains = config.unix_domains or {}
-  table.insert(config.unix_domains, spinoza_unix_domain)
-  config.default_gui_startup_args = { "connect", "spinoza-unix" }
+  table.insert(config.unix_domains, linux_domain)
+  config.default_domain = "unix"
 end
 
 return M
