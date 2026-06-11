@@ -59,7 +59,7 @@ function M.apply_to_config(cfg)
   ---@type UnixDomain
   local spinoza_unix_domain = {
     name = "spinoza-unix",
-    local_path = "/run/user/" .. uid .. "/wezterm/sock",
+    socket_path = "/run/user/" .. uid .. "/wezterm/sock",
     no_serve_automatically = true,
   }
   config.unix_domains = config.unix_domains or {}
