@@ -4,10 +4,7 @@ local M = {}
 ---@param wezterm Wezterm
 local function sync_panes_plugin(config, wezterm)
   local sync_panes = wezterm.plugin.require("https://github.com/annie444/sync-panes.wez")
-  local opts = {
-    indicator = true,
-  }
-  sync_panes.apply_to_config(config, opts)
+  sync_panes.apply_to_config(config)
 end
 
 ---@param _ Config
