@@ -25,5 +25,7 @@ function M.apply_to_config(cfg)
   end
 
   config.animation_fps = 60
+  config.max_fps = 120
 end
+
 return M

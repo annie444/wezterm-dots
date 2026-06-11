@@ -43,8 +43,10 @@ function M.apply_to_config(cfg)
     return
   end
 
+  ---@type UnixDomain
   local linux_domain = {
     name = "unix",
+    local_echo_threshold_ms = 10,
   }
   config.unix_domains = config.unix_domains or {}
   table.insert(config.unix_domains, linux_domain)
